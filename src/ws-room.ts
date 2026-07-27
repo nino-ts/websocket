@@ -1,5 +1,5 @@
-import type { Server } from "bun";
-import type { WSClient, WSData, WSMessage, WSRoomConfig, WSRoomHandler } from "../types";
+import type { Server, ServerWebSocket } from "bun";
+import type { WSClient, WSData, WSMessage, WSRoomConfig, WSRoomHandler } from "./types";
 import { WSClientImpl } from "./ws-client";
 
 /**
@@ -15,6 +15,11 @@ export class WSRoom<T extends WSData = WSData> {
      * Map of connected clients
      */
     private clients: Map<string, WSClient<T>>;
+
+    /**
+     * Bun server instance (set when attached to Bun.serve).
+     */
+    private server: Server<T> | null;
 
     /**
      * Room handler implementation
@@ -110,7 +115,7 @@ export class WSRoom<T extends WSData = WSData> {
      * @param server - The Bun server instance
      * @returns The created WSClient
      */
-    public handleOpen(ws: ServerWebSocket<T>, _server: Server): WSClient<T> {
+    public handleOpen(ws: ServerWebSocket<T>, _server: Server<T>): WSClient<T> {
         const client = new WSClientImpl(ws, ws.data as T);
         this.clients.set(client.id, client);
 

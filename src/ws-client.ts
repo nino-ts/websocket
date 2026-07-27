@@ -1,5 +1,5 @@
 import type { ServerWebSocket } from "bun";
-import type { WSClient, WSData } from "../types";
+import type { WSClient, WSData } from "./types";
 
 /**
  * Unique ID generator for WebSocket clients.
