@@ -29,8 +29,8 @@ function createMockWS(data: WSData = {}): ServerWebSocket<WSData> {
 /**
  * Create a mock Server.
  */
-function createMockServer(): Server {
-    return {} as Server;
+function createMockServer(): Server<WSData> {
+    return {} as Server<WSData>;
 }
 
 describe("WSRoom", () => {

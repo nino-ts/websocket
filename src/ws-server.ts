@@ -1,4 +1,4 @@
-import type { WSData, WSRoomConfig, WSRoomHandler } from "../types";
+import type { WSData, WSRoomConfig, WSRoomHandler } from "./types";
 import { createWSHandler } from "./ws-handler";
 import { WSRoom } from "./ws-room";
 

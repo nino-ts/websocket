@@ -1,5 +1,5 @@
-import type { ServerWebSocket } from "bun";
-import type { WSData } from "../types";
+import type { Server, ServerWebSocket } from "bun";
+import type { WSData } from "./types";
 import type { WSRoom } from "./ws-room";
 
 /**
@@ -67,7 +67,7 @@ export function createWSHandler<T extends WSData = WSData>(
          * @param ws - The ServerWebSocket
          */
         open(ws: ServerWebSocket<T>): void {
-            const server = (ws as unknown as { server: Server }).server;
+            const server = (ws as unknown as { server: Server<T> }).server;
             room.handleOpen(ws, server);
         },
 
